@@ -1,0 +1,38 @@
+[
+  {
+    "topic_name": "Lecture 3: Loss functions",
+    "summary": "Trained on data until October 2023."
+  },
+  {
+    "topic_name": "Madhavan Mukund",
+    "summary": "Supervised learning uses gradient descent to optimize parameters via loss functions like MSE and cross entropy."
+  },
+  {
+    "topic_name": "Maximum likelihood estimators (MLE)",
+    "summary": "Build model M from training data D, compute parameters θ, and maximize likelihood for predictions P model."
+  },
+  {
+    "topic_name": "Log likelihood",
+    "summary": "Maximize log likelihood of model P(y_i | x_i, θ) as a sum for optimization."
+  },
+  {
+    "topic_name": "Maximizing Log likelihood",
+    "summary": "Log likelihood maximization involves optimizing parameters θ; entropy and cross entropy measure encoding efficiency for probability distributions."
+  },
+  {
+    "topic_name": "Cross entropy and MLE",
+    "summary": "MLE maximizes likelihood; minimizing cross entropy equals maximizing likelihood, with cross entropy loss as a specific case."
+  },
+  {
+    "topic_name": "Regression and MSE loss",
+    "summary": "Training data consists of noisy outputs from a linear function, modeled with Gaussian noise for regression learning."
+  },
+  {
+    "topic_name": "Regression and MSE loss",
+    "summary": "Maximize likelihood using MSE as loss function for linear data perturbed by Gaussian noise, optimizing w for predicted values."
+  },
+  {
+    "topic_name": "Binary classification",
+    "summary": "Compute linear output, apply sigmoid; minimize cross entropy for maximum likelihood estimation using gradient descent; use specific loss functions."
+  }
+]

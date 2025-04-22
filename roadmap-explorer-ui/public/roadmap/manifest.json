@@ -23,6 +23,10 @@
     {
       "name": "what-are-human-rights.json",
       "path": "/roadmap/what-are-human-rights.json"
+    },
+    {
+      "name": "Lecture-3-handout.json",
+      "path": "/roadmap/Lecture-3-handout.json"
     }
   ]
 }

@@ -8,8 +8,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 // For rendering markdown with math support
 import ReactMarkdown from "react-markdown";
+import type { Components } from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import remarkGfm from "remark-gfm";
 import "katex/dist/katex.min.css";
 
 interface DetailedViewProps {}
@@ -177,13 +179,9 @@ const DetailedView: React.FC<DetailedViewProps> = () => {
             <CardContent className="pt-6">
               <div className="prose prose-lg max-w-none">
                 <ReactMarkdown
-                  remarkPlugins={[remarkMath]}
+                  remarkPlugins={[remarkMath, remarkGfm]}
                   rehypePlugins={[rehypeKatex]}
-                  components={{
-                    p: ({ node, ...props }) => (
-                      <p className="text-gray-700 leading-relaxed" {...props} />
-                    ),
-                  }}
+                  components={components}
                 >
                   {detailedContent?.detailed_content || ""}
                 </ReactMarkdown>
@@ -194,6 +192,52 @@ const DetailedView: React.FC<DetailedViewProps> = () => {
       </div>
     </div>
   );
+};
+
+const components: Components = {
+  p: ({ node, ...props }) => (
+    <p className="text-gray-700 leading-relaxed mb-4" {...props} />
+  ),
+  strong: ({ node, ...props }) => (
+    <strong className="font-bold text-gray-900" {...props} />
+  ),
+  h1: ({ node, ...props }) => (
+    <h1 className="text-3xl font-bold text-purple-800 mb-6" {...props} />
+  ),
+  h2: ({ node, ...props }) => (
+    <h2 className="text-2xl font-semibold text-purple-700 mb-4" {...props} />
+  ),
+  h3: ({ node, ...props }) => (
+    <h3 className="text-xl font-medium text-purple-600 mb-3" {...props} />
+  ),
+  ul: ({ node, ...props }) => (
+    <ul className="list-disc pl-6 mb-4 space-y-2" {...props} />
+  ),
+  ol: ({ node, ...props }) => (
+    <ol className="list-decimal pl-6 mb-4 space-y-2" {...props} />
+  ),
+  code: ({ inline, className, children, ...props }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => (
+    inline ? 
+      <code className="bg-gray-100 text-purple-600 px-1 rounded" {...props}>{children}</code> :
+      <code className="block bg-gray-800 text-white p-4 rounded-lg my-4 overflow-x-auto" {...props}>{children}</code>
+  ),
+  blockquote: ({ node, ...props }) => (
+    <blockquote className="border-l-4 border-purple-400 pl-4 italic my-4 text-gray-600" {...props} />
+  ),
+  a: ({ node, ...props }) => (
+    <a className="text-purple-600 hover:text-purple-800 underline" {...props} />
+  ),
+  table: ({ node, ...props }) => (
+    <div className="overflow-x-auto my-4">
+      <table className="min-w-full divide-y divide-gray-200" {...props} />
+    </div>
+  ),
+  th: ({ node, ...props }) => (
+    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" {...props} />
+  ),
+  td: ({ node, ...props }) => (
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" {...props} />
+  ),
 };
 
 export default DetailedView;
