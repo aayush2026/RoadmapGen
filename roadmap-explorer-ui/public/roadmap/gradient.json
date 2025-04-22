@@ -1,0 +1,81 @@
+{
+  "title": "Optimization in ML",
+  "summary": "Machine learning optimizes objectives like likelihood or error, often with complex landscapes and multiple local optima.",
+  "sections": [
+    {
+      "topic_name": "Optimization from data",
+      "summary": "Maximum likelihood estimation maximizes likelihood to estimate parameters, often using log-likelihood for independent data points in machine learning.",
+      "sections": []
+    },
+    {
+      "topic_name": "The first order",
+      "summary": "First-order methods optimize loss functions using value and gradient, offering speed, acceptable accuracy, exploration, and better generalization.",
+      "sections": [
+        {
+          "topic_name": "Gradient descent",
+          "summary": "Start solving by using the gradient descent algorithm to minimize L(θ).",
+          "sections": [
+            {
+              "topic_name": "Gradient descent",
+              "summary": "Gradient descent optimizes functions using gradients; learning rate balances speed and stability, with automatic differentiation aiding computation.",
+              "sections": [
+                {
+                  "topic_name": "Local quadratic model",
+                  "summary": "Gradient descent decreases objective function L(θ) with precise step sizes based on local curvature and gradient magnitudes.",
+                  "sections": []
+                },
+                {
+                  "topic_name": "Setting the learning rate",
+                  "summary": "Setting the step size incorrectly in gradient descent affects convergence speed and can lead to instability or divergence.",
+                  "sections": []
+                },
+                {
+                  "topic_name": "Conditioning",
+                  "summary": "Higher dimensional optimization can face conflicting learning rates; conditioning affects gradient descent efficiency, measured by the condition number.",
+                  "sections": []
+                },
+                {
+                  "topic_name": "Preconditioning",
+                  "summary": "Preconditioning optimizes gradient descent by transforming parameter vectors, enhancing efficiency with linear, often diagonal, preconditioners like Adam.",
+                  "sections": []
+                },
+                {
+                  "topic_name": "Momentum",
+                  "summary": "Gradient descent oscillates near stability limits; momentum method averages past gradients for faster convergence and larger steps.",
+                  "sections": [
+                    {
+                      "topic_name": "Gradient descent with momentum",
+                      "summary": "Momentum improves gradient descent by weighting recent gradients, reducing oscillation effects, and accelerating convergence in flatter directions.",
+                      "sections": []
+                    }
+                  ]
+                },
+                {
+                  "topic_name": "Stochastic gradient descent",
+                  "summary": "Stochastic and minibatch gradient descent improve efficiency by sampling training examples, reducing computation while maintaining gradient accuracy.",
+                  "sections": [
+                    {
+                      "topic_name": "Gradient sample variance",
+                      "summary": "Stochastic gradient descent introduces gradient sample variance, affecting progress and necessitating learning rate adjustments based on curvature and variance.",
+                      "sections": []
+                    },
+                    {
+                      "topic_name": "Behavior of SGD",
+                      "summary": "SGD has three convergence phases influenced by gradient variance, learning rate, and hyperparameters, affecting optimization and generalization.",
+                      "sections": []
+                    },
+                    {
+                      "topic_name": "Behavior of minibatch SGD",
+                      "summary": "Minibatch size affects computational cost, variance, and curvature, influencing gradient descent performance and learning rate tuning.",
+                      "sections": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
