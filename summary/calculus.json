@@ -1,0 +1,90 @@
+[
+  {
+    "topic_name": "INTRODUCTION TO CALCULUS",
+    "summary": "Trained on data until October 2023, authored by Sebastian Raschka, PhD, copyright 2016-2023."
+  },
+  {
+    "topic_name": "Contents",
+    "summary": "Differential calculus analyzes rates of change, focusing on derivatives and the chain rule, crucial for machine learning applications."
+  },
+  {
+    "topic_name": "1 Intuition",
+    "summary": "The derivative represents a function's instantaneous rate of change, calculated as the slope of the function."
+  },
+  {
+    "topic_name": "1.1 Derivative Notations",
+    "summary": "The derivative of functions f(x) is represented by df/dx (Leibniz) and f'(x) (Lagrange), calculated using limits."
+  },
+  {
+    "topic_name": "2 Derivatives of Common Functions",
+    "summary": "This section provides a quick reference table for derivatives of common functions, derived using basic principles."
+  },
+  {
+    "topic_name": "3 Common Differentiation Rules",
+    "summary": "Common differentiation rules include sum, difference, product, quotient, reciprocal, and chain rules; essential for machine learning applications."
+  },
+  {
+    "topic_name": "4 The Chain Rule - Computing the Derivative of a Composition of Functions",
+    "summary": "The chain rule differentiates composite functions using a three-step procedure involving outer and inner function derivatives."
+  },
+  {
+    "topic_name": "4.1 A Chain Rule Example",
+    "summary": "Applying the chain rule to differentiate a given function."
+  },
+  {
+    "topic_name": "4.1.1 Step 0: Organization",
+    "summary": "Identify the innermost function, express the outer function in terms of g(x), and apply the chain rule for differentiation."
+  },
+  {
+    "topic_name": "4.1.2 Step 1: Derivative of the outer function",
+    "summary": "Compute the derivative of the outer function using the chain rule with respect to the inner function."
+  },
+  {
+    "topic_name": "4.1.3 Step 2: Derivative of the inner function",
+    "summary": "Rewrite g(x) to apply the power rule for finding the derivative with respect to x."
+  },
+  {
+    "topic_name": "4.1.4 Step 3: Multiplying inner and outer derivatives",
+    "summary": "Multiply the derivatives of the outer and inner functions to find f'(x) for f(x) = log(√x)."
+  },
+  {
+    "topic_name": "5 Arbitrarily Long Function Compositions",
+    "summary": "The chain rule applies to any function composition, allowing derivative computation through nested functions."
+  },
+  {
+    "topic_name": "6 When a Function is Not Differentiable",
+    "summary": "A function is differentiable if its derivative exists at all points; ReLU is a common non-differentiable function in deep learning."
+  },
+  {
+    "topic_name": "6.1 ReLU Derivative in Deep Learning",
+    "summary": "ReLU derivative at x=0 is often set to 0, 1, or 0.5, minimally affecting neural network parameterization."
+  },
+  {
+    "topic_name": "7 Partial Derivatives and Gradients",
+    "summary": "Multivariable functions have vector derivatives (gradients) computed using partial derivatives, distinguishing changes in multiple inputs."
+  },
+  {
+    "topic_name": "8 Second Order Partial Derivatives",
+    "summary": "Second order partial derivatives involve taking the derivative of a partial derivative, allowing for different input arguments in multivariable functions."
+  },
+  {
+    "topic_name": "9 The Multivariable Chain Rule",
+    "summary": "This section discusses applying the multivariable chain rule to functions with multiple arguments and calculating partial derivatives."
+  },
+  {
+    "topic_name": "10 The Multivariable Chain Rule in Vector Form",
+    "summary": "The multivariable chain rule is often expressed in a more compact vector form for practical applications."
+  },
+  {
+    "topic_name": "10.1 Dot Products",
+    "summary": "The dot product and multivariable chain rule are computed using vector notation and derivatives in Lagrange notation."
+  },
+  {
+    "topic_name": "11 The Hessian Matrix",
+    "summary": "The Hessian matrix organizes four distinct second order partial derivatives for a multivariable function with n arguments."
+  },
+  {
+    "topic_name": "12 The Laplacian Operator",
+    "summary": "The Laplacian operator (∆) computes the divergence of a function's gradient, representing a second-order partial derivative."
+  }
+]

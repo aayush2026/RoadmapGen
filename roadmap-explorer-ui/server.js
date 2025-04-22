@@ -371,21 +371,47 @@ app.post("/api/detail", async (req, res) => {
               },
               body: JSON.stringify({
                 model: "gpt-3.5-turbo",
+                // messages: [
+                //   {
+                //     role: "system",
+                //     content: `You are a detailed educational content creator. Generate a comprehensive explanation about the requested topic.
+                
+                // Ensure you:
+                // 1. Create comprehensive, detailed content about the topic
+                // 2. Format your response with clear headings and structure
+                // 3. Correctly represent any mathematical expressions, formulas, or equations
+                // 4. Make the content educational and informative
+                
+                // For mathematical expressions or equations:
+                // - Use LaTeX format when appropriate (e.g., $E = mc^2$)
+                // - Ensure all variables are clearly explained
+                // - Present complex formulas in a readable way`,
+                //   },
+                //   {
+                //     role: "user",
+                //     content: prompt,
+                //   },
+                // ],
                 messages: [
                   {
                     role: "system",
-                    content: `You are a detailed educational content creator. Generate a comprehensive explanation about the requested topic.
-                
-                Ensure you:
-                1. Create comprehensive, detailed content about the topic
-                2. Format your response with clear headings and structure
-                3. Correctly represent any mathematical expressions, formulas, or equations
-                4. Make the content educational and informative
-                
-                For mathematical expressions or equations:
-                - Use LaTeX format when appropriate (e.g., $E = mc^2$)
-                - Ensure all variables are clearly explained
-                - Present complex formulas in a readable way`,
+                    content: `You are a detailed educational content creator. Generate a comprehensive explanation based on the provided text.
+                  
+                  Ensure you:
+                  1. Include all key concepts and details from the provided text
+                  2. Format your response with clear headings and structure
+                  3. Correctly represent any mathematical expressions, formulas, or equations
+                  4. Make the content educational and informative
+                  
+                  For mathematical expressions or equations:
+                  - Use proper LaTeX format with dollar signs: inline math with single $ (like $E = mc^2$) and display math with double $$ (like $$\\sigma(z) = \\frac{1}{1 + e^{-z}}$$)
+                  - Use proper LaTeX syntax and avoid Markdown-specific formatting inside math expressions
+                  - When writing fractions, use \\frac{numerator}{denominator}
+                  - For subscripts, use underscore (e.g., x_i)
+                  - For superscripts, use caret (e.g., e^{-z})
+                  - For Greek letters, use backslash (e.g., \\sigma, \\alpha)
+                  - For sum, product, and integral symbols, use \\sum, \\prod, and \\int
+                  - Properly escape special characters in LaTeX expressions with backslash`,
                   },
                   {
                     role: "user",

@@ -27,6 +27,10 @@
     {
       "name": "what-are-human-rights.json",
       "path": "/roadmap/what-are-human-rights.json"
+    },
+    {
+      "name": "calculus.json",
+      "path": "/roadmap/calculus.json"
     }
   ]
 }
