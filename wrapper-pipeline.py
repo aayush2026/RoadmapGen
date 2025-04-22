@@ -136,10 +136,17 @@ def main():
     
     # Build batch size argument if provided
     batch_size = "10" # Default changed to 10
+    store_embeddings = False
+    
+    # Parse arguments
     for i in range(len(sys.argv)):
         if sys.argv[i] == "--batch-size" and i+1 < len(sys.argv):
             batch_size = sys.argv[i+1]
-            break
+        elif sys.argv[i] == "--store-embeddings":
+            store_embeddings = True
+            
+    print(f"Batch size: {batch_size}")
+    print(f"Store embeddings: {store_embeddings}")
     
     # We'll use subprocess approach instead of importing, to avoid path issues
     try:
@@ -171,13 +178,23 @@ def main():
                 print(f"OpenAI SDK is available (version: {openai.__version__})")
             except ImportError:
                 print("ERROR: Could not import openai. Installing...")
-                subprocess.check_call([sys.executable, "-m", "pip", "install", "openai"])
+                # Install a version that's compatible with the existing code
+                subprocess.check_call([sys.executable, "-m", "pip", "install", "openai==0.28.1"])
                 print("OpenAI SDK installed successfully")
+                
+            # Try importing qdrant_client
+            try:
+                from qdrant_client import QdrantClient
+                print("Qdrant client is available")
+            except ImportError:
+                print("ERROR: Could not import qdrant_client. Installing...")
+                subprocess.check_call([sys.executable, "-m", "pip", "install", "qdrant-client"])
+                print("Qdrant client installed successfully")
         
         except ImportError as e:
             print(f"ERROR: Missing dependency: {e}")
             print("Installing required packages...")
-            subprocess.check_call([sys.executable, "-m", "pip", "install", "python-dotenv", "openai"])
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "python-dotenv", "openai==0.28.1", "qdrant-client"])
             print("Dependencies installed")
         
         # Run the pipeline as a subprocess to maintain the correct working directory
@@ -190,6 +207,10 @@ def main():
         # Add batch size if provided
         if batch_size != "10":  # Only if not the default
             command.extend(["--batch-size", batch_size])
+            
+        # Add store embeddings flag if enabled
+        if store_embeddings:
+            command.append("--store-embeddings")
             
         print(f"Running command: {' '.join(command)}")
         

@@ -53,7 +53,7 @@ def run_process(command, description):
         print(f"Error output: {e.stderr}")
         return False
 
-def process_document(document_path, batch_size=5):
+def process_document(document_path, batch_size=5, store_embeddings=False):
     """Process a document through the entire pipeline."""
     # Get document name for file naming
     document_name = get_document_name(document_path)
@@ -71,8 +71,15 @@ def process_document(document_path, batch_size=5):
     
     # Step 1: Convert document to chunks
     print("\n===== STEP 1: DOCUMENT CHUNKING =====")
+    chunking_command = ["python", "markdown_chunker.py", document_path]
+    
+    # Add store embeddings flag if needed
+    if store_embeddings:
+        chunking_command.append("--store-embeddings")
+        print("Embeddings will be stored in Qdrant")
+    
     chunking_success = run_process(
-        ["python", "markdown_chunker.py", document_path],
+        chunking_command,
         "document chunking"
     )
     
@@ -114,6 +121,7 @@ def main():
     parser = argparse.ArgumentParser(description="Process a document through the entire pipeline: chunking, summarization, and roadmap generation.")
     parser.add_argument("document_path", help="Path or URL to the document to process")
     parser.add_argument("--batch-size", type=int, default=10, help="Batch size for processing chunks (default: 5)")
+    parser.add_argument("--store-embeddings", action="store_true", help="Store embeddings in Qdrant")
     
     args = parser.parse_args()
     
@@ -124,7 +132,7 @@ def main():
         sys.exit(1)
     
     # Run the pipeline
-    success = process_document(args.document_path, args.batch_size)
+    success = process_document(args.document_path, args.batch_size, args.store_embeddings)
     
     if not success:
         print("\nPipeline failed. Please check the error messages above.")

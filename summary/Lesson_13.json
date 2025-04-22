@@ -1,0 +1,102 @@
+[
+  {
+    "topic_name": "BASIC CONCEPTS OF OOP",
+    "summary": "Learn basic Object Oriented Programming (OOP) concepts, benefits, and applications for managing large and complex programs."
+  },
+  {
+    "topic_name": "OBJECTIVES",
+    "summary": "Learn OOP concepts, benefits, and programming applications after completing this lesson."
+  },
+  {
+    "topic_name": "13.1 OBJECT ORIENTED PROGRAMMING",
+    "summary": "Object-oriented programming enhances productivity by addressing procedural programming weaknesses, managing program complexity with languages like C++ and Java."
+  },
+  {
+    "topic_name": "13.1.1 Features of OOPS",
+    "summary": "Object-oriented programming features include objects, classes, data abstraction, data encapsulation, inheritance, and polymorphism."
+  },
+  {
+    "topic_name": "Objects",
+    "summary": "Objects are class instances representing entities, interacting through message passing without needing to know each other's internal details."
+  },
+  {
+    "topic_name": "Class",
+    "summary": "Classes are user-defined data types containing data and functions; objects are instances of these classes, like employees in an Employee class."
+  },
+  {
+    "topic_name": "Basic Concepts of OOP",
+    "summary": "Trained on data until October 2023."
+  },
+  {
+    "topic_name": "Data Abstraction",
+    "summary": "Abstraction represents essential features while hiding background details, exemplified by using a switchboard without knowing its internal workings."
+  },
+  {
+    "topic_name": "Data Encapsulation",
+    "summary": "Data encapsulation combines data and functions in OOP, restricting direct access and ensuring data safety through member functions."
+  },
+  {
+    "topic_name": "Modularity",
+    "summary": "Modularity partitions programs into components, reducing complexity and establishing boundaries; modules compile independently yet collaborate to achieve goals."
+  },
+  {
+    "topic_name": "Inheritance",
+    "summary": "Inheritance allows a derived class to inherit properties from a base class, enabling hierarchical classification and feature enhancement."
+  },
+  {
+    "topic_name": "Polymorphism",
+    "summary": "Polymorphism in OOP allows data to be processed in multiple forms, affecting behavior based on data types used."
+  },
+  {
+    "topic_name": "Basic Concepts of OOP",
+    "summary": "Addition operation sums numbers and concatenates strings, e.g., 1 + 2 = 3 and a + b = ab."
+  },
+  {
+    "topic_name": "INTEXT QUESTIONS 13.1",
+    "summary": "(a) True  \n(b) True  \n(c) True  \n(d) False  \n(e) True"
+  },
+  {
+    "topic_name": "13.2 BENEFITS OF OOP",
+    "summary": "OOP enhances programmer productivity, software quality, maintenance, complexity management, upgradeability, work partitioning, and object reuse."
+  },
+  {
+    "topic_name": "Programming Applications of OOP",
+    "summary": "OOP is popular among programmers, extensively used in Windows development, with promising applications in various areas."
+  },
+  {
+    "topic_name": "MODULE - 3",
+    "summary": "OOP applications include multiple uses of data structures, parallel programming, simulation, AI, neural networks, and object-oriented databases."
+  },
+  {
+    "topic_name": "INTEXT QUESTIONS 13.2",
+    "summary": "1. Fill in the blanks:\n(a) object-oriented  \n(b) object; data  \n(c) class  \n(d) Encapsulation  \n(e) base  \n\n2. True or False:\n(a) True  \n(b) False  \n(c) True  \n(d) True  \n(e) True"
+  },
+  {
+    "topic_name": "WHAT YOU HAVE LEARNT",
+    "summary": "Object is a class variable; abstraction represents essential features; data encapsulation combines data and functions in a unit."
+  },
+  {
+    "topic_name": "Basic Concepts of OOP",
+    "summary": "Inheritance allows class objects to inherit properties, while polymorphism enables multiple forms of the same entity."
+  },
+  {
+    "topic_name": "TERMINAL EXERCISE",
+    "summary": "OOP features include data abstraction, encapsulation, polymorphism, and inheritance, offering benefits like modularity and code reusability."
+  },
+  {
+    "topic_name": "ANSWERS TO INTEXT QUESTIONS",
+    "summary": "Trained on data until October 2023."
+  },
+  {
+    "topic_name": "13.1",
+    "summary": "Trained on data until October 2023, with responses indicating true or false for various statements."
+  },
+  {
+    "topic_name": "13.2",
+    "summary": "OOP concepts include object, data, class, encapsulation; true/false statements evaluate understanding of these principles."
+  },
+  {
+    "topic_name": "MODULE - 3",
+    "summary": "Trained on C++ programming data until October 2023."
+  }
+]

@@ -7,6 +7,7 @@ import os
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
 from docling.document_converter import DocumentConverter
+from embedding_store import store_chunk_embeddings, create_collection_if_not_exists
 
 def get_document_name(document_path):
     # Extract filename from path or URL
@@ -27,7 +28,7 @@ def ensure_directory_exists(directory):
         os.makedirs(directory)
         print(f"Created directory: {directory}")
 
-def chunk_document(document_path):
+def chunk_document(document_path, store_embeddings=False):
     # Get document name for file naming
     document_name = get_document_name(document_path)
     
@@ -73,18 +74,25 @@ def chunk_document(document_path):
     
     print(f"Saved {len(chunks)} chunks to {chunks_file_path}")
     
+    # Store embeddings in Qdrant if requested
+    if store_embeddings and chunks:
+        print("Storing chunk embeddings in Qdrant...")
+        successful_chunks = store_chunk_embeddings(chunks, document_name)
+        print(f"Successfully stored {successful_chunks}/{len(chunks)} chunk embeddings")
+    
     return chunks, chunks_file_path
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python markdown_chunker.py <input_document_path_or_url>")
+        print("Usage: python markdown_chunker.py <input_document_path_or_url> [--store-embeddings]")
         sys.exit(1)
     
     document_path = sys.argv[1]
+    store_embeddings = "--store-embeddings" in sys.argv
     
     try:
         print(f"Converting document from {document_path} to markdown...")
-        chunks, output_path = chunk_document(document_path)
+        chunks, output_path = chunk_document(document_path, store_embeddings)
         print(f"Successfully created {len(chunks)} chunks and saved to {output_path}")
         
     except Exception as e:

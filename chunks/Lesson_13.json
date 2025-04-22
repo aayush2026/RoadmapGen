@@ -1,0 +1,102 @@
+[
+  {
+    "topic_name": "BASIC CONCEPTS OF OOP",
+    "content": "In the previous lesson you have learnt about the basics of C++ programming. Now you will learn about basic concepts of Object Oriented Programming (OOP). The object-oriented programming (OOP) is a different approach to programming and quite suitable for managing large and complex programs. An object oriented language combines the data to its function or code in such a way that access to data is allowed only through its function or code. In this lesson,  you  will  learn  about  the  various  benefits  provided  by  OOP  and applications of OOP.\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "OBJECTIVES",
+    "content": "After reading this lesson, you will be able to:\n\n- z learn the basic concepts used in OOP;\n- z describe the various benefits provided by OOP;\n- z explain the programming applications of OOP."
+  },
+  {
+    "topic_name": "13.1 OBJECT ORIENTED PROGRAMMING",
+    "content": "The object-oriented programming is a different approach to programming. It has  been  created  with  a  view  to  increase  programmer's  productivity  by overcoming the weaknesses found in procedural programming approach. Over the years many object-oriented programming languages such as C++, Java have come up and are becoming quite popular in the market. The major need for developing such languages was to manage the ever-increasing size and complexity of programs.\n\nBasic Concepts of OOP\n\nFig: 13.1: Paradigm of OOP\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "13.1.1 Features of OOPS",
+    "content": "The following are the features of object-oriented programming.\n\n- z Objects\n- z Classes\n- z Data abstraction\n- z Data encapsulation\n- z Inheritance\n- z Polymorphism"
+  },
+  {
+    "topic_name": "Objects",
+    "content": "Object is a class variable or an instance of class. It can represent a person, a bank account or any item that a program can handle. When a program is executed, the objects interact by sending messages to one another.\n\nFor example, if 'customer' and 'account' are two objects in a program, then the customer object may send message to account object requesting for a bank balance. Each object contains data and code to manipulate data. Objects can interact without having to know details of each other's data or code. It is sufficient to know the type of message accepted and the type of response returned by the objects.\n\nMODULE - 3\n\nProgramming in C++\n\nNotes\n\nFig: 13.2: Class Structure\n\n<!-- image -->\n\n<!-- image -->\n\nNotes"
+  },
+  {
+    "topic_name": "Class",
+    "content": "We have just mentioned that objects contain data and function or code to manipulate that data. The entire set of data and code of an object can be made a user-defined data type with the help of a class. In fact objects are variables of type class. Once a class has been defined, we can create any number of objects associated with that class.\n\nClass Name\n\nClass variables\n\nClass functions\n\nFor example, there is a class Employee which has Sue, Bill, Al, Hal, David different employees. Each employee will have unique identity; so they will form the objects of the class Employee.\n\nClass is a user defined data type. It is a blueprint of data and member functions.\n\nFig: 13.3: Employee class example\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "Basic Concepts of OOP",
+    "content": ""
+  },
+  {
+    "topic_name": "Data Abstraction",
+    "content": "Abstraction refers to the act of representing essential features without including the  background  details.  To  understand  this  concept  more  clearly,  take  an example of 'switch board'. You only press particular switches as per your requirement. You need not know the internal working of these switches. What is happening inside is hidden from you. This is abstraction, where you only know the essential things to operate on switch board without knowing the background details of switch board."
+  },
+  {
+    "topic_name": "Data Encapsulation",
+    "content": "Wrapping  up  of  data  and  functions  into  a  single  unit  is  called  as  data encapsulation. Encapsulation is the most basic concept of OOP. It is the way of combining both data and the functions that operate on that data under a single unit. The only way to access the data is provided by the functions (that are combined along with the data). These functions are considered as member functions in C++. It is not possible to access the data directly. If you want to reach the data item in an object, you call a member function in the object. It will read the data item and return the value to you. The data is hidden, so it is considered as safe and far away from accidental alternation. Data and its functions are said to be encapsulated into a single entity.\n\nIn the Figure 13.4 item is a class which has keep\\_data as member variable which cannot be accessed from outside directly. It can be accessed only via the member functions set() and get\\_value().\n\nFig: 13.4: Encapsulated Data and Functions in class item\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "Modularity",
+    "content": "The  act  of  partitioning  a  program  into  individual  components  is  called modularity. It gives the following benefits.\n\n- z It reduces its complexity to some extent.\n- z It creates a number of well-defined, documented boundaries within the program.\n\nModule is a separate unit in itself. It can be complied independently though it has links with other modules. Modules work quite closely in order to achieve the program's goal.\n\n<!-- image -->\n\nNotes\n\n<!-- image -->\n\n<!-- image -->\n\nNotes"
+  },
+  {
+    "topic_name": "Inheritance",
+    "content": "It is a process by which object of one class inherit the properties of objects of another class. It is the capability to define a new class in terms of an existing class. An existing class is known as a base class and the new class is known as derived class . Number of examples can be given on this aspect. For example, a motor cycle is a class in itself. It is also a member of two wheelers class. Two wheelers class in turn is a member of automotive class as shown in Fig. 13.5. The automotive is an example of base class and two wheelers is its derived class. In simple words, we can say a motor cycle is a two wheeler automotive.\n\nC++ supports such hierarchical classification of classes. The main benefit from inheritance is that we can build a generic base class, and obtain a new class by adding some new features to an existing class and so on. Every new class defined in that way consists of features of both the classes. Inheritance allows existing classes to be adapted to new application without the need for modification.\n\nFig: 13.5: Automotive class\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "Polymorphism",
+    "content": "Polymorphism is a key to the power of OOP. It is the concept that supports the capability of data to be processed in more than one form. For example, an operation may exhibit different behavior in different instances. The behavior depends upon the types of data used in the operation.\n\nFor example let us consider Fig 13.6 the operation of addition. For two numbers, the operation will generate a sum. If the operands are strings then the operation would produce a third string by concatenation."
+  },
+  {
+    "topic_name": "Basic Concepts of OOP",
+    "content": "ADD\n\nFig: 13.6: Addition operation\n\n<!-- image -->\n\nNumbers  = sum  e.g.   1 + 2 = 3\n\nStrings  = concatenated string i.e., a + b = ab"
+  },
+  {
+    "topic_name": "INTEXT QUESTIONS 13.1",
+    "content": "- 1. State whether the following statements are true or false:\n- (a) In procedure-oriented programming all data is shared by all functions.\n- (b) One of the striking features of OOP is division of program into objects that represent real world entities.\n- (c) Wrapping up of data of different types into a single unit is known as encapsulation.\n- (d) Object oriented programs are executed much faster than conventional programs.\n- (e) Since C is a subset of C++, C programs will run under C++ compilers."
+  },
+  {
+    "topic_name": "13.2 BENEFITS OF OOP",
+    "content": "OOP provides lot of benefits to both the program designer and the user. Objectoriented approach helps in solving many problems related to software development and quality of software product. The new technology assures greater programmer productivity, better quality of software and lesser maintenance cost. The major benefits are:\n\n- z Software complexity can be easily managed.\n- z Object-oriented systems can be easily upgraded.\n- z It is quite easy to partition the work in a project based on objects.\n- z Objects created for object oriented program can easily be reused in other programs."
+  },
+  {
+    "topic_name": "Programming Applications of OOP",
+    "content": "OOP has become one of the programming buzzwords today. There appears to be a great deal of excitement and interest among software programmers in using OOP. Applications of OOP are gaining importance in many areas. OOP has been extensively used in the development of Windows and word based systems such as MS-Windows, x-Windows etc. The promising application areas of OOP are:\n\nMODULE - 3\n\nProgramming in C++\n\nNotes\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "MODULE - 3",
+    "content": "Programming in C++\n\n<!-- image -->\n\nNotes\n\n- (i) Multiple uses of data structure: This is an application where the same data structure is used many times. For example a window data structure is used multiple-times in a windowing system.\n- (ii) Data  in  multiple  programs: This  is  an  application  where  the  same operations are performed on a data structure in different programs. For example, record validation in an accounting system.\n\nThe other application areas of OOP are parallel programming, simulation and modeling, AI and Expert systems, Neural Networks and CAD systems, objectoriented databases.\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "INTEXT QUESTIONS 13.2",
+    "content": "- 1. Fill in the blanks.\n- (a) C++ is an .................... language.\n- (b) An .................... is a self contained unit of .................... and function.\n- (c) A .................... can be used to create objects of its own type.\n- (d) .................... is a way of combining data with functions into an object.\n- (e) A derived class can be derived from a .................... class.\n- 2. State whether the following statements are true or false:\n- (a) C++ is an extension to C programming language.\n- (b) Functions of one object cannot access the functions of other objects in C++\n- (c) Inheritance is the capability to define a new class in terms of an existing class.\n- (d) Abstraction refers to the act of representing essential features without including the background details.\n- (e) An object is a new data type.\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "WHAT YOU HAVE LEARNT",
+    "content": "- z Object is a class variable or an instance of a class.\n- z Abstraction refers to the act of representing essential features without including the background details.\n- z Data encapsulation is the way of combining both data and the functions that operate on that data under a single unit."
+  },
+  {
+    "topic_name": "Basic Concepts of OOP",
+    "content": "- z Inheritance is a process by which object of one class inherit, the properties of objects of another class.\n- z Polymorphism means multiple forms of same thing.\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "TERMINAL EXERCISE",
+    "content": "- 1. What are the features of OOP?\n- 2. Explain the following terms briefly:\n- (a) Data abstraction\n- (b) Data encapsulation\n- (c) Polymorphism\n- (d) Inheritance\n- 3. Describe the various benefits of OOP.\n\n<!-- image -->"
+  },
+  {
+    "topic_name": "ANSWERS TO INTEXT QUESTIONS",
+    "content": ""
+  },
+  {
+    "topic_name": "13.1",
+    "content": "- 1. (a) False\n- (b) True\n- (c) False\n- (d) False\n- (e) True"
+  },
+  {
+    "topic_name": "13.2",
+    "content": "- 1. (a) OOP\n- (b) Object, data\n- (c) class\n- (d) encapsulation\n- (e) base\n- 2. (a) True\n- (b) False\n- (c) True\n- (d) True\n- (e) False"
+  },
+  {
+    "topic_name": "MODULE - 3",
+    "content": "Programming in C++\n\nNotes\n\n<!-- image -->"
+  }
+]
