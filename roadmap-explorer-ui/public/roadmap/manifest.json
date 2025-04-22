@@ -9,6 +9,10 @@
       "path": "/roadmap/gradient.json"
     },
     {
+      "name": "Lecture-3-handout.json",
+      "path": "/roadmap/Lecture-3-handout.json"
+    },
+    {
       "name": "Lesson_13.json",
       "path": "/roadmap/Lesson_13.json"
     },
@@ -23,10 +27,6 @@
     {
       "name": "what-are-human-rights.json",
       "path": "/roadmap/what-are-human-rights.json"
-    },
-    {
-      "name": "Lecture-3-handout.json",
-      "path": "/roadmap/Lecture-3-handout.json"
     }
   ]
 }
