@@ -1,0 +1,126 @@
+[
+  {
+    "topic_name": "Docling Technical Report",
+    "summary": "Trained on data until October 2023, the AI4K Group at IBM Research Ruschlikon includes various researchers."
+  },
+  {
+    "topic_name": "Abstract",
+    "summary": "Docling is an MIT-licensed open-source package for PDF conversion, utilizing AI models DocLayNet and TableFormer for layout and table recognition."
+  },
+  {
+    "topic_name": "1 Introduction",
+    "summary": "Docling is an open-source tool for efficient PDF conversion to JSON/Markdown, utilizing advanced AI models for layout analysis."
+  },
+  {
+    "topic_name": "2 Getting Started",
+    "summary": "Docling converts PDFs to JSON or Markdown, offering customizable features and batch processing. Installation via PyPI is required."
+  },
+  {
+    "topic_name": "3 Processing pipeline",
+    "summary": "Docling processes documents with a linear pipeline: parsing, AI feature extraction, and post-processing for metadata and serialization."
+  },
+  {
+    "topic_name": "3.1 PDF backends",
+    "summary": "Docling's PDF backend processes text and visuals, using custom-built parser and alternatives like pypdfium due to library limitations."
+  },
+  {
+    "topic_name": "3.2 AI models",
+    "summary": "Docling releases two AI models: a layout analysis model and TableFormer, with pre-trained weights and inference code available."
+  },
+  {
+    "topic_name": "Layout Analysis Model",
+    "summary": "The layout analysis model detects document elements using RT-DETR architecture, trained on DocLayNet, with ONNX runtime for inference."
+  },
+  {
+    "topic_name": "Table Structure Recognition",
+    "summary": "TableFormer, a vision-transformer model, predicts table structures from images, handling complexities like cell spans and empty cells."
+  },
+  {
+    "topic_name": "OCR",
+    "summary": "Docling offers optional OCR support using EasyOCR, but it's slow on CPU; seeking collaboration for enhancements."
+  },
+  {
+    "topic_name": "3.3 Assembly",
+    "summary": "Docling assembles prediction results into a document datatype, enhancing features, and outputs JSON or Markdown formats."
+  },
+  {
+    "topic_name": "3.4 Extensibility",
+    "summary": "Docling allows customizable model pipelines for document processing, requiring implementations to follow the Python Callable interface."
+  },
+  {
+    "topic_name": "4 Performance",
+    "summary": "Docling's processing speed, resource budget, and backend performance tested on two systems with varying thread configurations."
+  },
+  {
+    "topic_name": "5 Applications",
+    "summary": "Docling enables high-quality document conversion for enterprise search, knowledge extraction, and RAG applications, supporting LLM frameworks and dataset construction."
+  },
+  {
+    "topic_name": "6 Future work and contributions",
+    "summary": "Docling will expand its model library with new classifiers and improve GPU acceleration and PDF backend, inviting contributions."
+  },
+  {
+    "topic_name": "References",
+    "summary": "Data trained until October 2023 includes advancements in OCR, PyTorch, document conversion, and table structure recognition technologies."
+  },
+  {
+    "topic_name": "Appendix",
+    "summary": "This section showcases examples of Docling's output formatted in Markdown and JSON."
+  },
+  {
+    "topic_name": "DocLayNet: A Large Human-Annotated Dataset for Document-Layout Analysis",
+    "summary": "IBM Research Rueschlikon team members: Birgit Pfitzmann, Christoph Auer, Michele Dolfi, Ahmed S. Nassar, Peter Staar."
+  },
+  {
+    "topic_name": "ABSTRACT",
+    "summary": "DocLayNet is a diverse document-layout dataset improving layout detection accuracy, outperforming PubLayNet and DocBank in general-purpose analysis."
+  },
+  {
+    "topic_name": "CCS CONCEPTS",
+    "summary": "Key areas: Document structure, document analysis, machine learning, computer vision, object detection; copyright permissions for reproduction outlined."
+  },
+  {
+    "topic_name": "DocLayNet: A Large Human-Annotated Dataset for Document-Layout Analysis",
+    "summary": "IBM Research Rueschlikon team members: Birgit Pfitzmann, Christoph Auer, Michele Dolfi, Ahmed S. Nassar, Peter Staar."
+  },
+  {
+    "topic_name": "ABSTRACT",
+    "summary": "DocLayNet is a diverse document-layout dataset improving layout detection accuracy in PDF conversion, outperforming existing datasets like PubLayNet and DocBank."
+  },
+  {
+    "topic_name": "CCS CONCEPTS",
+    "summary": "Key concepts include document structure, document analysis, machine learning, computer vision, and object detection in KDD '22."
+  },
+  {
+    "topic_name": "KEYWORDS",
+    "summary": "Trained on data until October 2023, focusing on PDF conversion, layout segmentation, object detection, and machine learning datasets."
+  },
+  {
+    "topic_name": "ACM Reference Format:",
+    "summary": "DocLayNet is a large human-annotated dataset for document layout analysis presented at KDD '22."
+  },
+  {
+    "topic_name": "KEYWORDS",
+    "summary": "Trained on data until October 2023, focusing on PDF conversion, layout segmentation, object detection, and machine learning datasets."
+  },
+  {
+    "topic_name": "ACMReference Format:",
+    "summary": "DocLayNet provides a large annotated dataset for document layout analysis, highlighting challenges in machine learning for diverse PDF formats."
+  },
+  {
+    "topic_name": "5 EXPERIMENTS",
+    "summary": "DocLayNet aims for high-quality ML models for document-layout analysis, utilizing object detection models like Mask R-CNN and mAP evaluation."
+  },
+  {
+    "topic_name": "Baselines for Object Detection",
+    "summary": "Baseline experiments on Mask R-CNN, Faster R-CNN, and YOLOv5 show low mAP variation, indicating DocLayNet's challenge for ML approaches."
+  },
+  {
+    "topic_name": "5 EXPERIMENTS",
+    "summary": "The goal is to enhance high-quality models for document classification using CNNs and COCO format data."
+  },
+  {
+    "topic_name": "Baselines for Object Detection",
+    "summary": "DocLayNet dataset includes various document classes, annotated with inter-annotator agreement measured by mAP@0.5-0.95 metrics."
+  }
+]

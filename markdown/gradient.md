@@ -1,0 +1,285 @@
+## Optimization in ML
+
+As we've seen, a lot of machine learning methods are based on optimizing something: maximizing a likelihood, minimizing an error measure, maximizing information content, etc. Let's say we want to solve
+
+L ( θ ) θ ∈ θ min R d
+
+Here is our objective, and   is a  -dimensional parameter vector. L ( θ ) θ d
+
+In our examples so far, the objective has often been simple (e.g., convex and quadratic); but  more  generally,  it  could  have  a  nearly  arbitrary  shape,  including  multiple  local optima:
+
+In this plot, . The horizontal axes represent and , and the vertical axis is . θ ∈ R 2 θ 1 θ 2 L ( θ )
+
+<!-- image -->
+
+## Optimization from data
+
+Where does a problem like this come from ? Suppose we have a model with parameters . This model tells us the probability of an individual data point . Write for all of our data, . Then by Bayes' rule, θ xi X x … x 1 T
+
+P ( θ ∣ X ) = P ( X ∣ θ ) P ( θ )/ P ( X )
+
+In this equation,
+
+- The term doesn't depend on  , so it doesn't help us prefer one value of   over another. P ( X ) θ θ
+- The term is often uninformative : we don't know ahead of time what   is likely to be, so is either uniform or near-uniform over some large region. P ( θ ) θ P ( θ )
+
+That leaves just one term to help us find a good value of  : . This term is called the likelihood or evidence for  .  The  most  probable is the one that maximizes the likelihood. θ P ( X ∣ θ ) θ θ
+
+Picking   this way is called maximum likelihood estimation. It's a common and effective strategy. There are alternatives, though: e.g., we could use a more-informative prior, or we could ask for a sample of likely values of   instead of a single point estimate. θ θ
+
+If our data points are independent of one another, then
+
+P ( X ∣ θ ) = P ( x ∣ 1 θ ) P ( x ∣ 2 θ ) … P ( x ∣ T θ )
+
+In this case, since sums can be easier to work with than products, we'll often work with the log-likelihood
+
+ln P ( X ∣ θ ) = ln P ( x ∣ 1 θ ) + ln P ( x ∣ 2 θ ) + … + ln P ( x ∣ T θ )
+
+We can do something similar if our model tells us the conditional probability of a label given  input  features .  A  derivation  like  the  one  above  leads  us  to  maximize  the conditional likelihood or the conditional log-likelihood yi xi P ( Y ∣ X , θ )
+
+ln P ( Y ∣ X , θ ) = ln P ( y ∣ 1 x , θ ) + 1 ln P ( y ∣ 2 x , θ ) + 2 …+ln P ( y ∣ T x , θ ) T
+
+This sort of structure in our objective function is common in machine learning: a sum over training examples, so that .  We'll see more later about how to take advantage of it. As a concrete example, could measure squared error for a training example in a regression problem: L ( θ ) = ℓ ( θ ) ∑ i i ℓ i
+
+ℓ ( θ ) = i ( x · i θ -y ) i 2
+
+## The first order
+
+We will  focus  on first-order methods for optimization. These are methods that access our loss function only through its value and gradient.
+
+Even though they're simple, first-order methods turn out to be quite effective for a lot of machine learning problems. This happens for a few different reasons:
+
+- Speed: each optimizer step can be fast. If we have big data or big models, we might not be able to afford fancier optimizers.
+- Just enough accuracy: first-order methods are not as accurate as some other optimizers. But in ML, we often don't care about that: those last few decimal places of the loss function probably correspond to overfitting, and won't translate to the test set.
+- Exploration: the trajectory of a first-order method can skip over small increases in the loss, helping us find a region of better values of  . It can also wander around the region near a local optimum, and help us characterize the shape of the objective function there. θ
+- Regularization: For reasons we don't completely understand, first-order methods seem to pick values of   that generalize better - even among those with the same . θ L ( θ )
+
+For these reasons, first-order methods are often the best place to start if we need to pick an optimizer for machine learning.
+
+## Gradient descent
+
+To solve , one place to start is the gradient descent algorithm: min L ( θ ) θ
+
+## Gradient descent
+
+input for : θ , η , T 1 t ← 1, …, T g ← t d θ dL ∣ ∣ θ t θ ← t +1 θ -t η gt
+
+The vector is the gradient of at . The parameter   is the learning rate or step size : we'll see below that it trades off optimization speed against stability. g ∈ t R d L θ t η
+
+With the conventions we've been using so far, the gradient is the transpose of the first derivative: if ,  then .  But  you  will  commonly  see  the  other  convention,  where stands for the gradient itself rather than its transpose. dL = L ( θ ) d θ ' g = t L ( θ ) ' t T L '
+
+Why does gradient descent work ? In the neighborhood of , the function decreases most rapidly in the negative gradient direction : θ t L -gt
+
+<!-- image -->
+
+So, if we take a small-enough step in this direction, it should reduce . But if we step too far,  the  curvature  of can mean that we don't actually reduce  .  Strong  curvature shows up in the figure as contour lines that bend sharply or change spacing suddenly. L L L
+
+One of the main bottlenecks in  using  gradient  descent  is  computing  the  gradients  both in the sense that it takes up a lot of compute time and in the sense that it takes up a lot of of our effort in applying gradient descent to any given problem. To help with the latter  difficulty,  we  can  use automatic  differentiation toolkits;  these  are  commonly included  for  example  in  libraries  for  working  with  neural  networks.  However,  autodiff toolkits can't always handle every case we need, and may even fail silently, so it's wise to consider them as a potential source of bugs. (Though perhaps fewer bugs than if we tried to differentiate by hand.)
+
+A  lot  of  times,  we  won't  wind  up  using  gradient  descent  itself,  for  reasons  to  be discussed below. But its cousin, stochastic gradient descent, can often work quite well. The two methods share a lot of the same intuition and analysis; so we'll start by looking at plain gradient descent, and then cover the stochastic version.
+
+## Local quadratic model
+
+Above we gave a handwavy intuition for why a gradient step decreases .  Can  we make this intuition precise ? Let's look at a 1d slice of our objective by restricting to the line that goes through and . L ( θ ) L ( θ ) θ t θ t +1
+
+We can make a first-order Taylor expansion:
+
+1
+
+L ( θ ) = L ( θ ) + t ( θ -θ ) · t g + t ∥ θ -2 1 θ ∥ R ( θ ) t 2
+
+Here the residual is an unknown function - but by the mean value theorem, we know that is equal to the second derivative of our slice of ,  evaluated  at  some point along the line segment between and  . R ( θ ) R ( θ ) L θ t θ
+
+Suppose we know that the second derivative is bounded, at least in the neighborhood of .  In  particular,  let's  say for some constant .  Remembering that  our step is equal to , we get θ t ∣ R ( θ ) ∣ ≤ H H ≥ 0 ( θ -t +1 θ ) t -η gt
+
+L ( θ ) ≤ t +1 L ( θ ) -t η ∥ g ∥ + t 2 η ∥ g ∥ H 2 1 2 t 2
+
+So, as long as and , we get a decrease in . If we set , we will reduce   by at least g = t  0 0 < η < 2/ H L η = 1/ H L
+
+2 H ∥ g ∥ t 2
+
+on each step.
+
+In other words, we make progress as long as we take a small enough step; the best step size depends on the local curvature of . For fast progress we want the gradient to be big compared to the local curvature. If we know the curvature, the size of the gradients, and the difference between the initial and final values of , we can predict how long our optimization will take. L L
+
+## Setting the learning rate
+
+Of course, we often have no idea what the local curvature of is like. So what happens if we set the step size wrong ? L
+
+If we set   too small, we slow down our progress: as long as   is small compared to the local curvature, the gradient direction will be more or less the same as . So, if we halve our step size, it will just take us twice as many steps to go the same distance. η η gt +1 gt
+
+On the other hand, if we set   too big, the result can be much more dramatic. Imagine minimizing a simple 1d quadratic: η
+
+L ( θ ) = H θ 2 1 2
+
+The gradient descent update is
+
+θ = t +1 θ -t η H θ = t (1 -η H ) θ t
+
+If we set , so that , we get η = 3/ H 1 -η H = -2
+
+θ = t ( -2) θ t -1 1
+
+so that the sequence flips back and forth from positive to negative while blowing up exponentially ! θ t
+
+Exercise:  what  happens  to  gradient  descent  if  we  multiply  the  objective by a constant ? L α
+
+## Conditioning
+
+It gets worse: if the dimension of   is higher than 1, we can run into both of the above problems at once: the learning rate can simultaneously be too small and too large. If we're lucky, we get a nice objective function like this one: θ
+
+Image credit: Boyd & Vandenberghe
+
+<!-- image -->
+
+In the above picture, the curvature is similar in all directions, so the same learning rate is appropriate no matter what is. θ t
+
+But more typically, this happens:
+
+Image credit: Boyd & Vandenberghe
+
+<!-- image -->
+
+In  the  above  picture,  the  objective  is  flat  (low  second  derivative)  in  the  horizontal direction,  but  sharply  curved  (high  second  derivative)  in  the  vertical  direction.  So,  we have to choose a small learning rate to avoid diverging in the vertical direction - which means that we can only make slow progress in the horizontal direction.
+
+This phenomenon, where the curvature is different in different directions, is called the conditioning of an optimization problem. In a well conditioned problem, the curvature in all  directions  is  similar,  and  gradient  descent  can  make  fast  progress.  In  a  poorly conditioned  problem,  the  curvature  varies  a  lot,  and  gradient  descent  can  only  make slow progress. We can see this difference if we look at how quickly gradient descent reduces the objective function in the above two problems:
+
+Image credit: Boyd & Vandenberghe
+
+<!-- image -->
+
+To measure conditioning, it's common to define the condition number of a problem to be the ratio between the largest and smallest curvatures that we can find in our objective
+
+function. Locally, this is the ratio between the largest and smallest positive eigenvalues of the Hessian (second derivative matrix) of our objective . L
+
+We can relate the condition number to the 1D bound that we computed earlier,
+
+L ( θ ) ≤ t +1 L ( θ ) -t 2 H ∥ g ∥ t 2
+
+Here is the 1D curvature, which is bounded by the largest curvature in our objective function . H L
+
+## Preconditioning
+
+A  sharp  eye  might  notice  that  the  two  contour  plots  above  are  strongly  related:  the second one is just stretched horizontally and squashed vertically compared to the first. We can undo this stretching and squashing by redefining our parameter vector: if is the  loss  function  pictured  in  the  second  figure,  then  we  can  instead  minimize , where   is defined as L ( θ ) M ( ϕ ) = L ( θ ) ϕ
+
+ϕ = θ ( 2 1 0 0 3 4 )
+
+If  we  know  (or  can  guess)  a  good  transformation,  we  are  rewarded:  gradient  descent can  make  progress  much  faster,  even  though  we  are  effectively  solving  the  same problem.  The  cost  is  that  we  have  to  go  back  and  forth  between  the  two  different parameter  representations  on  every  iteration  of  gradient  descent;  if  it's  expensive  to apply or invert our transformation, we may lose more time than we gain.
+
+This  strategy,  transforming  our  parameter  vector  to  make  an  optimization  problem easier,  is  called preconditioning .  In  general  we  can  precondition  with  any  invertible transformation  that  we  like.  But,  linear  preconditioners  are  by  far  the  most  common. And,  by  far  the  most  common  linear  preconditioners  are  diagonal  ones  like  we  used above.
+
+Finding  a  good  preconditioner  -  one  that  is  both  efficient  and  effective  -  may  be difficult. But if we can do it, it's a great way to speed up first-order methods. For this reason, there are a lot of methods that try to discover a reasonable preconditioner as we go along: e.g., one of the most popular is Adam.
+
+## Momentum
+
+We can see in the above plots, as well as in our analysis of the quadratic objective, that gradient  descent  tends  to oscillate when the learning rate is close to or above its stability  limit.  That  is,  the  gradient  tends  to  point  in  opposite  directions  on  adjacent iterations. Maybe if we could get rid of this oscillation, we could push the learning rate higher and converge faster ?
+
+In the momentum method, we keep a running average of the past gradients, and use this average  direction  to  update instead of the raw gradient. Intuitively, if our gradients keep pointing in the same direction, our optimizer builds up momentum and takes larger steps. θ
+
+## Gradient descent with momentum
+
+input for : θ , η , β , T 1 m ← 0 0 t ← 1, …, T g ← t d θ dL ∣ ∣ θ t m ← t (1 -β ) g + t β mt -1 θ ← t +1 θ -t m 1 -β t η t
+
+Note that we are weighting recent gradients more heavily in our average;  -step older gradients are scaled down by a factor of . This is called an exponentially weighted moving average. Also note the scaling factor : this ensures that the weights in our average always sum to 1. Without this  factor,  in  early  iterations  we'd  go  too  slowly,  since  it  would  take  a  while  to  build  up momentum even if all of our gradients point in the same direction. τ β τ 1 -β t 1
+
+Why does momentum help ? If the gradients are oscillating, they'll tend to cancel each other out. So, if our learning rate is too high for the curvature in some direction, we'll automatically  slow  down  our  progress  in  that  direction.  Meanwhile,  if  our  curvature  is flatter  in  another  direction,  our  gradients  in  that  direction  will  tend  to  have  the  same sign, so we'll continue to make fast progress.
+
+It turns out that, if we set the learning rate and momentum carefully, we can under some conditions reduce at a rate proportional to without diverging. Compare this to the earlier progress rate for plain gradient descent, which was proportional to . For poorly conditioned  objectives,  the  faster  rate  can  make  a  huge  difference.  (See  the supplemental reading for a full derivation.) L H 1 H 1
+
+## Stochastic gradient descent
+
+Until now we haven't paid attention to the structure of our objective when designing or
+
+analyzing our algorithms. Let's look now at what the consequences are if our objective is a sum over training examples:
+
+ℓ ( θ ) θ min N 1 i =1 ∑ N i
+
+What kind of difficulties might we run into if we use gradient descent on this kind of objective ?
+
+If our examples are i.i.d., then every one of the terms in our objective is in some sense equivalent. It seems like a waste to compute all of them on every iteration of gradient descent - especially if we are only going to take a small step in the resulting direction.
+
+This  suggests  that  we  could  evaluate  only  a  few  randomly  sampled  terms  from  the objective on each iteration without losing too much information. That is, we will pick indices  uniformly  and  randomly  without  replacement,  and  average  together  the gradients  of  only  the  corresponding  terms .  If we call this method stochastic gradient descent , while if we call it minibatch (stochastic) gradient descent . B ℓ j B = 1 B > 1
+
+For this purpose, have a look at numpy.random.choice .
+
+Intuitively, we might get unlucky and increase the value of on any given iteration: we could pick a non-representative sample and step in the wrong direction. But on average our  stochastic  gradients  will  point  in  the  right  direction.  If  our  learning  rate  is  small enough, the errors will tend to average out, and we will still tend to decrease . L L
+
+Stochastic / Minibatch Gradient Descent
+
+<!-- image -->
+
+```
+input for : for : random w/o replacement θ , η , β , B , T 1 m ← 0 0 t ← 1, …, T i ← 1, …, B j ← ti 1 : N g ← ti ℓ d θ d j ti ∣ ∣ θ t g ← t g B 1 ∑ i =1 B ti m ← t (1 -β ) g + t β mt -1 θ ← t +1 θ -t m 1 -β t η t
+```
+
+Note  that  we  sample  indices  without  replacement.  In  fact,  it  works  best  to  sample without replacement across an entire epoch (a pass through our training data). That is, we mark each term that we sample, and never sample it again until we've hit every other term  in  our  objective.  When  we  run  out  of  unmarked  terms,  we  clear  the  marks,  and continue.
+
+## Gradient sample variance
+
+Let's first look at how stochastic gradient descent works ( ). The biggest difference from plain gradient descent is gradient sample variance :  our stochastic gradient might point in a completely different direction depending on which term we sample. If we're lucky the gradient variance will be small compared to the size of the gradient. If we're unlucky, the reverse might be true. B = 1 ℓ j
+
+Variance  can  be  a  problem:  if is locally strictly convex (e.g., near a local optimum), Jensen's inequality says that L
+
+E ( L ( θ )) > t +1 L ( E ( θ )) t +1
+
+The RHS is what happens with plain gradient descent: we deterministically set using the expected gradient. The LHS is what happens with SGD: we go in the right direction on average, but gradient variance together with the curvature of mean that we won't make as much progress - or might even tend to increase  . θ t +1 L L
+
+If our gradient samples have variance bounded by in all directions, and our learning rate  is ,  then  our  updates  to will have variance bounded by .  Then,  if  the curvature of is , the difference between the two sides of Jensen's inequality will be bounded by . σ 2 η θ t η σ 2 2 L H H η σ 2 2
+
+This analysis means that we now have two constraints on learning rate: one due to the way the curvature of changes the deterministic gradient (as before) and one due to variance (new for SGD). If we didn't have to worry about variance, our analysis of plain gradient descent shows that we could improve   by per iteration by setting . But this setting of   results in a penalty of due to gradient variance. So, if is comparable to or bigger than , we may have to reduce our learning rate to make progress. L L ∥ E ( g ) ∥ /2 H t 2 η = 1/ H η σ / H 2 σ 2 ∥ E ( g ) ∥ t 2
+
+## Behavior of SGD
+
+Because  of  the  differing  effects  of  curvature  and  variance,  SGD  typically  has  three different phases of convergence:
+
+- Far away from the optimum, the gradient samples all point in about the same direction. So, dominates, and SGD behaves mostly like plain gradient descent. ∥ E ( g ) ∥ t 2
+- A bit nearer to the optimum, the gradient variance and squared gradient norm
+
+become comparable. In this regime our progress depends on moving slowly enough to average out the gradient variance, and SGD will make much less progress per iteration than plain gradient descent. (It may still be faster overall, since the iterations are a lot cheaper.)
+
+- When we get sufficiently close to the optimum, the gradient variance dominates, and we stop reducing   at all. Instead we bounce around at a scale determined by , , and  . L σ 2 H η
+
+We  can  tune  the  transitions  between  these  phases  by  tuning  the  learning  rate:  in  the range we care about, changing   affects the variance of as , but it affects our reduction in from the expected update as . So reducing   can mitigate the effect of gradient variance; for example, it can allow the second phase to make more progress, getting us closer to a local optimum before we start bouncing around. η η gt O ( η ) 2 L E ( η g ) t O ( η ) η
+
+Unfortunately, though, the best value of   might be different during different parts of the overall  optimization.  For  this  reason,  it's  common  to  alter during  the  course  of optimization  using  a learning  rate  schedule .  Designing  a  learning  rate  schedule  is unfortunately somewhat of a black art: at one point, one of my past professors set up his workstation so that his mouse pointer controlled learning rate and momentum, and learned  to  achieve  the  fastest  possible  convergence  on  the  fly  by  streaming  a  lot  of diagnostics and developing an intuition for what could keep the network on the ragged edge of stability. η η
+
+Perhaps counterintuitively, once we fix  , the three phases above do not depend on the size of our training set: all that matters is the curvature of and the variance of . SGD might "finish" (i.e., reach the last regime above) before even seeing all of our data. η L gt
+
+Instead, the size of our training set influences optimization only indirectly, through our choice  of  hyperparameters  (learning  rate  schedule  and,  once  we  get  to  it,  minibatch size).  That  is,  with  a  larger  training  set,  we  can  hope  to  generalize  better,  so  we  may want  to  select  different  hyperparameters  to  make  our  optimization  more  accurate. These altered hyperparameters can change our convergence rate.
+
+## Behavior of minibatch SGD
+
+What happens when we use minibatches of size ? Broadly we get similar behavior to SGD, but there are three interacting effects we need to consider. B > 1
+
+The  first  effect  is  computational  cost:  if  we  double ,  we  have  to  compute  twice  as B
+
+many gradients for each parameter update. The second effect is variance: if we double ,  we  halve  the  variance  of  our  gradient  estimates.  The  third  effect  is  curvature:  the gradient of changes as we update , and this change might wipe out any benefit of an accurate gradient estimate. B L θ t
+
+Looking at the first two effects together, it makes sense to compare:
+
+- two steps of SGD with minibatch size and learning rate  , vs. B η
+- one step of SGD with minibatch size and learning rate . 2 B 2 η
+
+These  approaches  seem  similar  at  first  glance.  If  the  variance  of  a  single  gradient sample is bounded by in all directions, then either of these approaches yields a total update variance of . Either of these approaches yields a similar decrease in , at least  to  first  order.  And,  either  of  these  approaches  has  to  compute gradients in total. σ 2 2 η σ / B 2 2 L 2 B
+
+There  are  some  factors  that  break  the  apparent  equivalence,  though.  Computing gradient  samples  might  take  a  different  amount  of  wall-clock  time  depending  on whether  we  do  them  all  at  once  or  split  them  up.  This  is  particularly  true  if  we  can compute the samples in parallel (e.g., on a GPU); in this case the all-at-once approach could be much cheaper. 2 B
+
+On the other hand, curvature kicks in if we try to grow too much. One way to see this is to remember that step size is limited both by the variance of our stochastic gradient estimates and by the effect of the curvature of on the deterministic gradient direction. For  small  minibatches,  typically  the  first  limit  will  be  tighter;  in  this  case,  our  two approaches will have similar performance. But bigger minibatches increase the step size while keeping the variance approximately constant. So eventually, the second limit will take over and keep us from increasing and   too much. B L B η
+
+Finally,  our  minibatch  size  might  be  limited  by  architectural  factors.  For  example,  we might  want  to  ensure  that  each  minibatch  fits  within  our  GPU  memory  or  our  main memory cache.
+
+Empirically,  good  minibatch  sizes  can  vary  greatly  depending  on  details  of  our  loss function and computational architecture. Reasonable values might range anywhere from to . B = 10 B = 100, 000
+
+Over this range of , we actually have a fair bit of flexibility: we can often achieve good performance with a wide range of different minibatch sizes and learning rates. But there B
+
+is one important caveat: the analysis above tells us that we have to scale   along with . If  we  fail  to  do  this,  we  can  wind  up  implicitly  using  a  mis-tuned  learning  rate,  and hurting performance. η B
+
+Suggested reading:
+
+For gradient descent:
+
+- Boyd & Vandenberghe, Convex Optimization, sec. 9.3
+
+For an analysis of momentum:
+
+- http://mitliagkas.github.io/ift6085-2019/ift-6085-lecture-5-notes.pdf
