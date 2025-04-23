@@ -370,7 +370,7 @@ app.post("/api/detail", async (req, res) => {
                 Authorization: `Bearer ${openaiKey}`,
               },
               body: JSON.stringify({
-                model: "gpt-3.5-turbo",
+                model: "gpt-4",
                 // messages: [
                 //   {
                 //     role: "system",

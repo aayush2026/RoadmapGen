@@ -5,6 +5,10 @@
       "path": "/roadmap/1706.json"
     },
     {
+      "name": "calculus.json",
+      "path": "/roadmap/calculus.json"
+    },
+    {
       "name": "gradient.json",
       "path": "/roadmap/gradient.json"
     },
@@ -27,10 +31,6 @@
     {
       "name": "what-are-human-rights.json",
       "path": "/roadmap/what-are-human-rights.json"
-    },
-    {
-      "name": "calculus.json",
-      "path": "/roadmap/calculus.json"
     }
   ]
 }

@@ -13,6 +13,7 @@ import {
 } from "./ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "./ui/badge";
+import YouTubeRecommendations from "./YouTubeRecommendations";
 
 interface SidebarSummaryProps {
   isOpen: boolean;
@@ -150,6 +151,18 @@ const SidebarSummary: React.FC<SidebarSummaryProps> = ({
                     >
                       {topic.summary}
                     </motion.p>
+
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                      className="mt-6 pt-4 border-t border-gray-100"
+                    >
+                      <YouTubeRecommendations
+                        topic={topic.topic_name || topic.title || ""}
+                        summary={topic.summary}
+                      />
+                    </motion.div>
 
                     {documentName && (
                       <motion.div
